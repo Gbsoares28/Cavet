@@ -1,0 +1,8 @@
+{
+  "name": "CAVET - Hospital Veterinário 24h",
+  "description": "Site premium para o Centro de Atendimento Veterinário Tijuca.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
