@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useRef } from 'react';
-import { MapPin, Phone, MessageCircle, Instagram, HeartPulse, Clock, ArrowRight, Globe, HelpCircle, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { MapPin, Phone, MessageCircle, Instagram, HeartPulse, Clock, ArrowRight, Globe, HelpCircle, Star, ChevronLeft, ChevronRight, Stethoscope } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const TikTokIcon = ({ size = 24 }: { size?: number }) => (
@@ -13,7 +13,7 @@ const TikTokIcon = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 
-function LinkItem({ link, idx }: { link: any; idx: number }) {
+function LinkItem({ link, idx }: { link: any; idx: number; key?: React.Key }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ function LinkItem({ link, idx }: { link: any; idx: number }) {
       transition={{ delay: idx * 0.1 }}
       className={`group rounded-2xl overflow-hidden transition-all duration-300 ${
         link.primary 
-          ? 'bg-watergreen text-white shadow-lg shadow-watergreen/30' 
+          ? 'bg-cavet-blue text-white shadow-lg shadow-cavet-blue/30' 
           : 'bg-white text-slate-800 shadow-sm border border-slate-100 hover:border-watergreen/50 hover:shadow-md'
       }`}
     >
@@ -65,12 +65,166 @@ function LinkItem({ link, idx }: { link: any; idx: number }) {
                 rel="noreferrer"
                 className={`w-full flex items-center justify-center py-3 rounded-xl font-bold text-sm transition-colors ${
                   link.primary 
-                    ? 'bg-white text-watergreen hover:bg-sand' 
+                    ? 'bg-white text-cavet-blue hover:bg-slate-50' 
                     : 'bg-watergreen text-white hover:bg-watergreen-light'
                 }`}
               >
                 Acessar Link
               </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
+function SpecialtiesSection() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const specialties = [
+    {
+      title: "👁️ OFTALMOLOGIA | Gabriela",
+      schedules: [
+        { day: "Quinta-feira", time: "08:00 às 11:30" }
+      ],
+      notice: "⚠️ Importante: antes de realizar o agendamento, entre em contato para confirmar a disponibilidade."
+    },
+    {
+      title: "🧠 NEUROLOGIA | Luana",
+      schedules: [
+        { day: "Quarta-feira e sábado", time: "08:00 às 12:00" }
+      ]
+    },
+    {
+      title: "🩺 ENDOCRINOLOGIA / NEFROLOGIA | Ana",
+      schedules: [
+        { day: "Terça-feira", time: "10:00 às 16:00" },
+        { day: "Quinta-feira", time: "12:00 às 17:00" }
+      ]
+    },
+    {
+      title: "🐾 DERMATOLOGIA | Silvia",
+      schedules: [
+        { day: "Segunda-feira", time: "09:00 às 12:00" }
+      ]
+    },
+    {
+      title: "🔬 ULTRASSONOGRAFIA | Phelipe",
+      schedules: [
+        { day: "Segunda e quarta-feira", time: "11:00 às 16:00" }
+      ]
+    },
+    {
+      title: "🔬 ULTRASSONOGRAFIA | Guilherme",
+      schedules: [
+        { day: "Terça e quinta-feira", time: "11:00 às 16:00" }
+      ]
+    },
+    {
+      title: "❤️ CARDIOLOGIA | Felipe",
+      schedules: [
+        { day: "Quarta-feira", time: "13:00 às 15:00" },
+        { day: "Sábado", time: "18:00 às 19:30" }
+      ]
+    }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.45 }}
+      className="bg-white text-slate-800 shadow-sm border border-slate-100 rounded-2xl overflow-hidden group hover:border-watergreen/50 hover:shadow-md transition-all duration-300"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center p-4 text-left focus:outline-none hover:bg-black/5 transition-colors"
+      >
+        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-colors bg-sand text-petrol group-hover:bg-watergreen/10 group-hover:text-watergreen">
+          <Stethoscope size={24} />
+        </div>
+        <div className="ml-4 flex-grow">
+          <h2 className="font-bold text-base leading-tight">🩺 ESPECIALIDADES E AGENDAMENTOS</h2>
+          <p className="text-xs mt-0.5 text-slate-500">
+            Horários, profissionais e agendamento
+          </p>
+        </div>
+        <div className={`shrink-0 transition-transform duration-300 text-slate-300 group-hover:text-watergreen ${isOpen ? 'rotate-90' : ''}`}>
+          <ArrowRight size={20} />
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 pt-0 border-t border-slate-100 mt-2 flex flex-col gap-3.5">
+              {/* Header inside */}
+              <div className="bg-slate-50/90 p-4 rounded-xl border border-slate-100 text-center">
+                <h3 className="font-bold text-sm text-slate-900 mb-1.5 flex items-center justify-center gap-1.5">
+                  🩺 ATENDIMENTOS ESPECIALIZADOS
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed mb-2.5">
+                  Na Cavet, contamos com profissionais de diferentes especialidades para oferecer um atendimento mais completo ao seu pet.
+                </p>
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-petrol bg-sand/80 px-3 py-1.5 rounded-full mb-2">
+                  <span>📅 Todos os atendimentos são realizados com horário agendado.</span>
+                </div>
+                <p className="text-xs text-slate-500">
+                  Confira abaixo as especialidades, profissionais e horários disponíveis.
+                </p>
+              </div>
+
+              {/* Specialties Cards */}
+              <div className="flex flex-col gap-2.5">
+                {specialties.map((item, idx) => (
+                  <div key={idx} className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex flex-col gap-2">
+                    <h4 className="font-bold text-xs text-slate-900 uppercase tracking-wide">
+                      {item.title}
+                    </h4>
+                    <div className="flex flex-col gap-1.5 text-xs text-slate-700">
+                      {item.schedules.map((sch, sIdx) => (
+                        <div key={sIdx} className="flex flex-wrap items-center justify-between gap-1 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-100">
+                          <span className="font-medium text-slate-800">📅 {sch.day}</span>
+                          <span className="text-slate-600 font-mono text-[11px] bg-white px-2 py-0.5 rounded border border-slate-200/60">🕐 {sch.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {item.notice && (
+                      <div className="bg-amber-50/90 border border-amber-200 text-amber-900 text-xs p-2.5 rounded-lg leading-relaxed">
+                        {item.notice}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Booking WhatsApp Section */}
+              <div className="bg-emerald-50/90 border border-emerald-200 p-4 rounded-xl text-center flex flex-col items-center gap-2 mt-1">
+                <h4 className="font-bold text-sm text-emerald-950 flex items-center justify-center gap-1.5">
+                  📲 QUER AGENDAR?
+                </h4>
+                <p className="text-xs text-emerald-900 leading-relaxed max-w-xs">
+                  Entre em contato com a nossa equipe pelo WhatsApp para <strong>consultar a disponibilidade e agendar o horário do seu pet</strong>.
+                </p>
+                <div className="font-bold text-sm text-emerald-950 bg-emerald-100/70 px-3 py-1 rounded-full border border-emerald-200">
+                  📱 (21) 98667-9262
+                </div>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=5521986679262&text=Ol%C3%A1%2C+gostaria+de+consultar+a+disponibilidade+e+agendar+um+hor%C3%A1rio+para+o+meu+pet.&type=phone_number&app_absent=0"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full mt-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-sm"
+                >
+                  <MessageCircle size={18} />
+                  👇 AGENDAR PELO WHATSAPP
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
@@ -300,6 +454,8 @@ export default function App() {
           {links.map((link, idx) => (
             <LinkItem key={idx} link={link} idx={idx} />
           ))}
+          {/* Especialidades e Agendamentos */}
+          <SpecialtiesSection />
           {/* FAQ */}
           <FAQSection />
         </div>
