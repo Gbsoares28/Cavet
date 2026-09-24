@@ -66,7 +66,7 @@ function LinkItem({ link, idx }: { link: any; idx: number; key?: React.Key }) {
                 className={`w-full flex items-center justify-center py-3 rounded-xl font-bold text-sm transition-colors ${
                   link.primary 
                     ? 'bg-white text-cavet-blue hover:bg-slate-50' 
-                    : 'bg-watergreen text-white hover:bg-watergreen-light'
+                    : 'bg-cavet-blue text-white hover:bg-cavet-blue-light shadow-md shadow-cavet-blue/25'
                 }`}
               >
                 Acessar Link
@@ -82,51 +82,99 @@ function LinkItem({ link, idx }: { link: any; idx: number; key?: React.Key }) {
 function SpecialtiesSection() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const specialties = [
+  interface SpecialtyItem {
+    title: string;
+    professional: string;
+    crmv?: string;
+    modality?: string;
+    schedules: { day: string; time?: string }[];
+    whatsappMsg: string;
+  }
+
+  const specialties: SpecialtyItem[] = [
     {
-      title: "👁️ OFTALMOLOGIA | Gabriela",
+      title: "👁️ OFTALMOLOGIA | Drª. Gabriela Freitas",
+      professional: "Drª. Gabriela Freitas",
+      crmv: "CRMVRJ 10877",
       schedules: [
         { day: "Quinta-feira", time: "08:00 às 11:30" }
       ],
-      notice: "⚠️ Importante: antes de realizar o agendamento, entre em contato para confirmar a disponibilidade."
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Oftalmologia com a Drª. Gabriela Freitas (CRMVRJ 10877) na Cavet."
     },
     {
-      title: "🧠 NEUROLOGIA | Luana",
+      title: "🧠 NEUROLOGIA | Drª. Luana Gayoso",
+      professional: "Drª. Luana Gayoso",
+      crmv: "CRMVRJ 19593",
       schedules: [
         { day: "Quarta-feira e sábado", time: "08:00 às 12:00" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Neurologia com a Drª. Luana Gayoso (CRMVRJ 19593) na Cavet."
     },
     {
-      title: "🩺 ENDOCRINOLOGIA / NEFROLOGIA | Ana",
+      title: "🩺 ENDOCRINOLOGIA / NEFROLOGIA | Drª. Ana Claudia Rosa",
+      professional: "Drª. Ana Claudia Rosa",
+      crmv: "CRMVRJ 6855",
       schedules: [
         { day: "Terça-feira", time: "10:00 às 16:00" },
         { day: "Quinta-feira", time: "12:00 às 17:00" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Endocrinologia / Nefrologia com a Drª. Ana Claudia Rosa (CRMVRJ 6855) na Cavet."
     },
     {
-      title: "🐾 DERMATOLOGIA | Silvia",
+      title: "🐾 DERMATOLOGIA | Drª. Silvia Thire",
+      professional: "Drª. Silvia Thire",
+      crmv: "CRMVRJ 8925",
       schedules: [
         { day: "Segunda-feira", time: "09:00 às 12:00" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Dermatologia com a Drª. Silvia Thire (CRMVRJ 8925) na Cavet."
     },
     {
-      title: "🔬 ULTRASSONOGRAFIA | Phelipe",
+      title: "🦴 ORTOPEDIA E CIRURGIA GERAL | Drª. Gabriella Bianque",
+      professional: "Drª. Gabriella Bianque",
+      crmv: "CRMVRJ 11586",
+      modality: "Atendimento agendado e encaixe",
+      schedules: [
+        { day: "Segunda a sexta", time: "11:00 às 17:00h" }
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Ortopedia e Cirurgia Geral com a Drª. Gabriella Bianque (CRMVRJ 11586) na Cavet."
+    },
+    {
+      title: "🔬 ULTRASSONOGRAFIA | Dr. Philipe Gabriel Ferreira",
+      professional: "Dr. Philipe Gabriel Ferreira",
+      crmv: "CRMVRJ 17098",
       schedules: [
         { day: "Segunda e quarta-feira", time: "11:00 às 16:00" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um exame de Ultrassonografia com o Dr. Philipe Gabriel Ferreira (CRMVRJ 17098) na Cavet."
     },
     {
-      title: "🔬 ULTRASSONOGRAFIA | Guilherme",
+      title: "🔬 ULTRASSONOGRAFIA | Dr. Guilherme Varela",
+      professional: "Dr. Guilherme Varela",
+      crmv: "CRMVRJ 20869",
       schedules: [
         { day: "Terça e quinta-feira", time: "11:00 às 16:00" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um exame de Ultrassonografia com o Dr. Guilherme Varela (CRMVRJ 20869) na Cavet."
     },
     {
-      title: "❤️ CARDIOLOGIA | Felipe",
+      title: "🎗️ ONCOLOGIA | Drª. Camila Land Manier",
+      professional: "Drª. Camila Land Manier",
+      crmv: "CRMVRJ 18743",
+      schedules: [
+        { day: "Atendimento com horário agendado" }
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Oncologia com a Drª. Camila Land Manier (CRMVRJ 18743) na Cavet."
+    },
+    {
+      title: "❤️ CARDIOLOGIA | Dr. Felipe Marques",
+      professional: "Dr. Felipe Marques",
+      crmv: "CRMV RJ 9031",
       schedules: [
         { day: "Quarta-feira", time: "13:00 às 15:00" },
         { day: "Sábado", time: "18:00 às 19:30" }
-      ]
+      ],
+      whatsappMsg: "Olá! Gostaria de agendar um atendimento de Cardiologia com o Dr. Felipe Marques (CRMV RJ 9031) na Cavet."
     }
   ];
 
@@ -134,7 +182,7 @@ function SpecialtiesSection() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.45 }}
+      transition={{ delay: 0.15 }}
       className="bg-white text-slate-800 shadow-sm border border-slate-100 rounded-2xl overflow-hidden group hover:border-watergreen/50 hover:shadow-md transition-all duration-300"
     >
       <button
@@ -165,18 +213,9 @@ function SpecialtiesSection() {
           >
             <div className="p-4 pt-0 border-t border-slate-100 mt-2 flex flex-col gap-3.5">
               {/* Header inside */}
-              <div className="bg-slate-50/90 p-4 rounded-xl border border-slate-100 text-center">
-                <h3 className="font-bold text-sm text-slate-900 mb-1.5 flex items-center justify-center gap-1.5">
-                  🩺 ATENDIMENTOS ESPECIALIZADOS
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed mb-2.5">
-                  Na Cavet, contamos com profissionais de diferentes especialidades para oferecer um atendimento mais completo ao seu pet.
-                </p>
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-petrol bg-sand/80 px-3 py-1.5 rounded-full mb-2">
-                  <span>📅 Todos os atendimentos são realizados com horário agendado.</span>
-                </div>
-                <p className="text-xs text-slate-500">
-                  Confira abaixo as especialidades, profissionais e horários disponíveis.
+              <div className="bg-slate-50/90 p-3 rounded-xl border border-slate-100 text-center">
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  📅 Atendimento completo com horário agendado. Confira as especialidades e horários disponíveis:
                 </p>
               </div>
 
@@ -184,22 +223,42 @@ function SpecialtiesSection() {
               <div className="flex flex-col gap-2.5">
                 {specialties.map((item, idx) => (
                   <div key={idx} className="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex flex-col gap-2">
-                    <h4 className="font-bold text-xs text-slate-900 uppercase tracking-wide">
-                      {item.title}
-                    </h4>
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <h4 className="font-bold text-xs text-slate-900 uppercase tracking-wide">
+                        {item.title}
+                      </h4>
+                      {item.crmv && (
+                        <span className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200/80 font-mono tracking-wider">
+                          {item.crmv}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-col gap-1.5 text-xs text-slate-700">
+                      {item.modality && (
+                        <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50/90 px-2.5 py-1.5 rounded-lg border border-emerald-200/70 flex items-center gap-1.5">
+                          <span>✨</span>
+                          <span>{item.modality}</span>
+                        </div>
+                      )}
                       {item.schedules.map((sch, sIdx) => (
                         <div key={sIdx} className="flex flex-wrap items-center justify-between gap-1 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-100">
                           <span className="font-medium text-slate-800">📅 {sch.day}</span>
-                          <span className="text-slate-600 font-mono text-[11px] bg-white px-2 py-0.5 rounded border border-slate-200/60">🕐 {sch.time}</span>
+                          {sch.time && (
+                            <span className="text-slate-600 font-mono text-[11px] bg-white px-2 py-0.5 rounded border border-slate-200/60">🕐 {sch.time}</span>
+                          )}
                         </div>
                       ))}
                     </div>
-                    {item.notice && (
-                      <div className="bg-amber-50/90 border border-amber-200 text-amber-900 text-xs p-2.5 rounded-lg leading-relaxed">
-                        {item.notice}
-                      </div>
-                    )}
+
+                    <a
+                      href={`https://api.whatsapp.com/send/?phone=5521986679262&text=${encodeURIComponent(item.whatsappMsg)}&type=phone_number&app_absent=0`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-0.5 w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-xs border border-emerald-200 transition-colors active:scale-[0.99]"
+                    >
+                      <MessageCircle size={14} className="text-emerald-600" />
+                      Agendar com {item.professional}
+                    </a>
                   </div>
                 ))}
               </div>
@@ -451,11 +510,14 @@ export default function App() {
 
         {/* Links */}
         <div className="w-full flex flex-col gap-4">
-          {links.map((link, idx) => (
-            <LinkItem key={idx} link={link} idx={idx} />
-          ))}
+          {/* Botão de Emergência 24h */}
+          <LinkItem link={links[0]} idx={0} />
           {/* Especialidades e Agendamentos */}
           <SpecialtiesSection />
+          {/* Demais Links */}
+          {links.slice(1).map((link, idx) => (
+            <LinkItem key={idx + 1} link={link} idx={idx + 2} />
+          ))}
           {/* FAQ */}
           <FAQSection />
         </div>
